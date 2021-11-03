@@ -2,69 +2,36 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Run app locally
 
 In the project directory, you can run:
 
-### `yarn start`
+### `npm start` or `yarn start`
 
-Runs the app in the development mode.\
+Runs the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
+The page will reload if you make edits.
 You will also see any lint errors in the console.
 
-### `yarn test`
+## How to calculate total price for each item?
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+In `ItemsDataTable` component, I'm checking if an item is on sale. If so, I'm performing the following steps:
 
-### `yarn build`
+1. I'm checking if its quantity is equal or larger than the sale price quantity.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. If so, I'm calculating the remainder of item quantity divided by the sale item quantity.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. I'm also dividing item quantity by the sale item quantity.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. Finally, the total price of an on sale item would be the sum of item price multiplied by result of step 2, plus sale price multiplied by result of step 3.
 
-### `yarn eject`
+If the item is not on sale, then the total price would be the item price multiplied by item quantity.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## How to calculate total cost?
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+In `ItemsPurchasedTotalCost` component, I'm using the JavaScript built-in method: `reduce` to calculate the overall sum plus the result of step 4 above if the item is on sale. Otherwise, I'm calculating the overall sum plus the item price divided by item quantity.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## How to calculate total savings?
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+In `ItemsPurchasedTotalCost` component, I'm also using the JavaScript built-in method: `reduce` to calculate the overall sum plus the result of item price multiplied by item quantity, and then subtracted by item total price, if the item is on sale. Otherwise the overall sum is returned.
